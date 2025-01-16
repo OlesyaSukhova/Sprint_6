@@ -4,7 +4,6 @@ from curl import  order_page_url
 from locators.order_page_locators import OrderPageLocators
 from pages.base_page import BasePage
 
-
 class OrderPage(BasePage):
     @allure.step('Дождаться загрузку страницы заказа')
     def wait_for_order_page(self):
@@ -29,6 +28,18 @@ class OrderPage(BasePage):
         self.send_keys_to_input(OrderPageLocators.comment_field, comment)
         self.click_on_element(OrderPageLocators.order_button_on_page_order)
         self.click_on_element(OrderPageLocators.yes_button)
+
+    @allure.step('Дождаться появление текста элемента')
+    def wait_order_created(self):
+        self.text_is_visible(OrderPageLocators.order_created, 'Заказ оформлен')
+
+    @allure.step('Дождаться появление кнопки Просмотреть заказ')
+    def wait_for_find_element(self):
+        self.find_element(OrderPageLocators.see_status_button)
+
+
+
+
 
 
 

@@ -1,10 +1,7 @@
 import allure
 import pytest
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 from data import credentials_1, credentials_2
-from locators.order_page_locators import OrderPageLocators
 from pages.order_page import OrderPage
 
 
@@ -21,8 +18,8 @@ class TestMakeAnOrder:
             credentials['phone_number'],
             credentials['comment']
         )
-        WebDriverWait(driver, 100).until(EC.text_to_be_present_in_element(OrderPageLocators.order_created, 'Заказ оформлен'))
-        assert driver.find_element(*OrderPageLocators.see_status_button).is_displayed()
+        order_page.wait_order_created()
+        assert order_page.wait_for_find_element
 
 
 

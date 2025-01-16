@@ -1,8 +1,5 @@
-import time
-
 import allure
 import pytest
-from selenium.webdriver.support.wait import WebDriverWait
 
 import data
 
@@ -16,7 +13,6 @@ class TestQuestionAboutImportant:
         main_page = MainPage(driver)
         main_page.wait_for_main_page()
         main_page.wait_for_questions_list()
-        time.sleep(0.5)
         main_page.click_on_question(question_number)
         main_page.wait_for_answer_visible(question_number)
         assert main_page.check_answer_name(expected_text, question_number)

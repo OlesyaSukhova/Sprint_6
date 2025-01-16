@@ -2,16 +2,10 @@ import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from conftest import driver
-from curl import main_page_url
-
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
-
-    @allure.step('Дождаться загрузку главной страницы')
-    def wait_for_main_page(self, locator, timeout=10):
-        return WebDriverWait(self.driver, timeout).until(EC.url_to_be(main_page_url))
 
     @allure.step('Подождать видимость элемента')
     def wait_for_element(self, locator, timeout=10):
@@ -45,3 +39,25 @@ class BasePage:
     @allure.step('Подождать и проверить, что атрибут элемента содержит текст')
     def wait_for_attribute(self, locator, attribute,  value, timeout=10):
         return WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_attribute(locator, attribute, value))
+
+    @allure.step('Дождаться загрузку страницы')
+    def wait_for_page(self, page_url):
+        self.driver.get(page_url)
+
+    @allure.step('Дождаться появление текста элемента')
+    def text_is_visible(self, locator, text):
+        WebDriverWait(self.driver, 100).until(EC.text_to_be_present_in_element(locator, text))
+
+    @allure.step('Дождаться, пока откроются два окна')
+    def wait_for_two_windows(self):
+        WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(2))
+        new_window = self.driver.window_handles[1]
+        self.driver.switch_to.window(new_window)
+
+    @allure.step('Дождаться перехода на сайт Дзена')
+    def wait_url_change(self, url, timeout=1000):
+        WebDriverWait(self.driver, timeout).until(EC.url_contains(url))
+
+    @allure.step('Найти элемент на странице')
+    def find_element(self, locator, timeout=10):
+        self.driver.find_element(locator, timeout)
