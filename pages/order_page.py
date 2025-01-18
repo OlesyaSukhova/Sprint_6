@@ -7,7 +7,7 @@ from pages.base_page import BasePage
 class OrderPage(BasePage):
     @allure.step('Дождаться загрузку страницы заказа')
     def wait_for_order_page(self):
-        self.driver.get(order_page_url)
+        self.wait_for_page(order_page_url)
         self.click_on_element(OrderPageLocators.consent_button)
 
     @allure.title('Заполнение полей ввода на странице заказа самоката')

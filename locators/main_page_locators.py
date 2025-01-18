@@ -10,7 +10,7 @@ class MainPageLocators:
 
     @staticmethod
     def question_number(question):
-        return By.CSS_SELECTOR, f'.accordion .accordion__item:nth-child({question}) .accordion__heading'
+        return By.CSS_SELECTOR, f'.accordion .accordion__item:nth-child({question}) .accordion__heading div'
 
     @staticmethod
     def answer_number(answer):

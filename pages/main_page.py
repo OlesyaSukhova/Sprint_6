@@ -3,7 +3,6 @@ from time import sleep
 import allure
 
 from curl import main_page_url
-from locators.order_page_locators import OrderPageLocators
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
 
@@ -20,12 +19,7 @@ class MainPage(BasePage):
     def click_on_question(self, question_number, timeout=10):
         question_locator = MainPageLocators.question_number(question_number)
         self.scroll_to_element(question_locator)
-        # sleep здесь не по ошибке/незнанию, а потому что никакой таймаут и
-        # никакой expected condition (clickable/visible/whatever)
-        # не дожидается толком, пока изображение самоката не перестанет перекрывать заголовок вопроса
-        # если sleep убрать, тесты начнут флапать :(
-        sleep(0.5)
-        self.click_on_element(question_locator, timeout)
+        self.jsclick_on_element(question_locator, timeout)
 
     @allure.step('Дождаться, пока откроется нужный ответ')
     def wait_for_answer_visible(self, answer_number):
