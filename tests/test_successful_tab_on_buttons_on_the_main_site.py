@@ -33,15 +33,3 @@ class TestButtonsOneTheMainPage:
         main_page.wait_for_two_windows()
         main_page.redirect_to_dzen()
         assert main_page.is_current_url_contains('dzen.ru')
-        assert 'dzen.ru' in driver.current_url
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
